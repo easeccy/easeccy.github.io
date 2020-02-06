@@ -950,14 +950,15 @@
                         window.onerror = null;
                     }
                 },
-                on('load', function() {
+                db = {}
+            on('load', function() {
+                setTimeout(function() {
+                    $body.className = $body.className.replace(/\bis-loading\b/, 'is-playing');
                     setTimeout(function() {
-                        $body.className = $body.className.replace(/\bis-loading\b/, 'is-playing');
-                        setTimeout(function() {
-                            $body.className = $body.className.replace(/\bis-playing\b/, 'is-ready');
-                        }, 1375);
-                    }, 100);
-                });
+                        $body.className = $body.className.replace(/\bis-playing\b/, 'is-ready');
+                    }, 1375);
+                }, 100);
+            });
             var style, sheet, rule;
             style = document.createElement('style');
             style.appendChild(document.createTextNode(''));
