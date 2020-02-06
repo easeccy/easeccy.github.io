@@ -829,8 +829,6 @@
                     <li><a class="n03" href="https://linkedin.com/enesabdullahoglu"><svg><use xlink:href="#icon-90b"></use></svg><span class="label">LinkedIn</span></a></li>
                     <li><a class="n04" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;%61%62%64%75%6c%6c%61%68%6f%67%6c%75%65%6e%65%73%40%67%6d%61%69%6c%2e%63%6f%6d"><svg><use xlink:href="#icon-90a"></use></svg><span class="label">Email</span></a></li>
                 </ul>
-                <p id="credits">
-                    <a href="https://carrd.co/">( Made with Carrd )</a></p>
             </div>
         </div>
     </div>
@@ -940,16 +938,18 @@
             var thisURL = function() {
                     return window.location.href.replace(window.location.search, '').replace(/#$/, '');
                 },
-                getVar = function(name) {
-                    var a = window.location.search.substring(1).split('&'),
-                        b, k;
-                    for (k in a) {
-                        b = a[k].split('=');
-                        if (b[0] == name) return b[1];
-                    }
-                    return null;
-                },
 
+                errors = {
+                    handle: function(handler) {
+                        window.onerror = function(message) {
+                            (handler)(message);
+                            return true;
+                        };
+                    },
+                    unhandle: function() {
+                        window.onerror = null;
+                    }
+                },
                 on('load', function() {
                     setTimeout(function() {
                         $body.className = $body.className.replace(/\bis-loading\b/, 'is-playing');
